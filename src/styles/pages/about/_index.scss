@@ -1,0 +1,367 @@
+.about {
+  padding: 10rem 0 5rem 0;
+  background-color: #181818;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 80vh;
+  .container {
+    height: 100%;
+  }
+  @include respond-above(md) {
+    padding: 10rem 0;
+    height: 100vh;
+  }
+  @include respond-above(xl) {
+    padding: 10.5596620908vh 0 0 0;
+    height: 230vh;
+  }
+  &-image {
+    position: absolute;
+    top: calc(50% - 10vh);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    width: calc(100% * 8 / 12);
+    height: 150vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @include respond-down(medium) {
+      width: 70%;
+      top: 50%;
+      height: 70vh;
+    }
+
+    @include respond-down(small) {
+      height: 50vh;
+      width: 75%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &-mask {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    &::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.08);
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+  }
+  &-hobby {
+    color: #e1e1e1;
+    position: absolute;
+    font-size: 2.4rem;
+    right: 0;
+    bottom: 0;
+    width: calc(100% * 4 / 6);
+    text-indent: 3em;
+    padding-left: 5px;
+    padding-right: 1.5rem;
+    line-height: 109%;
+    letter-spacing: -0.04em;
+    @include respond-above(md) {
+      font-size: 4rem;
+      width: 49.666667%;
+      right: 3vw;
+      bottom: -8%;
+      text-indent: 4em;
+    }
+    @media (min-width: 1023px) {
+      bottom: 5%;
+    }
+    @include respond-above(xl) {
+      bottom: 8%;
+      right: -4.083vw;
+      font-size: 4.688vw;
+    }
+  }
+  &-text {
+    bottom: 0;
+    position: absolute;
+    color: #e1e1e1;
+    width: 25%;
+    font-size: 1rem;
+    text-transform: uppercase;
+    .word {
+      overflow: hidden;
+    }
+    @include respond-above(md) {
+      width: 15%;
+      bottom: -7%;
+    }
+    @include respond-above(xl) {
+      left: 2.083vw;
+      bottom: 20%;
+      font-size: 0.833vw;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+      width: 5%;
+    }
+  }
+  &-title {
+    font-size: 2.4rem;
+    letter-spacing: -0.04em;
+    text-indent: 2.5em;
+    position: relative;
+    color: #e1e1e1;
+    width: 65%;
+    line-height: 109%;
+    @include respond-above(md) {
+      width: 50%;
+      font-size: 4rem;
+    }
+    @include respond-above(xl) {
+      font-size: 4.688vw;
+      text-indent: 4em;
+      width: 55%;
+      line-height: 0;
+    }
+    > span {
+      text-indent: initial;
+    }
+    span.is-parrent {
+      overflow: hidden;
+      line-height: 90%;
+
+      @include respond-above(md) {
+        line-height: 97%;
+      }
+
+      @include respond-above(xl) {
+        line-height: 109%;
+      }
+    }
+  }
+  &-full {
+    height: 100vh;
+    width: 100%;
+
+    > * {
+      height: 100%;
+    }
+    &__inner {
+      height: 100vh;
+      > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        font-size: 0;
+      }
+    }
+  }
+
+  &-footer {
+    position: fixed;
+    z-index: 10;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 4rem;
+    mix-blend-mode: exclusion;
+    filter: invert(100%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    @include respond-down(medium) {
+      display: none;
+    }
+
+    &__number {
+      display: flex;
+      align-items: center;
+    }
+
+    &__animate {
+      position: relative;
+      overflow: hidden;
+      width: 0.673vw;
+      line-height: 0;
+      @include respond-down(medium) {
+        width: 12px;
+      }
+      > span {
+        display: inline-block;
+      }
+    }
+
+    &__text {
+      font-size: 0.521vw;
+      line-height: 110%;
+      letter-spacing: -0.01em;
+      font-weight: 500;
+      text-transform: uppercase;
+
+      @include respond-down(medium) {
+        font-size: 1rem;
+      }
+    }
+
+    &__coppyright {
+      position: relative;
+      overflow: hidden;
+      width: 5.521vw;
+      text-align: center;
+      @include respond-down(medium) {
+        width: 110px;
+      }
+      > span {
+        text-align: center;
+        display: inline-block;
+      }
+    }
+  }
+
+  &-attr {
+    visibility: hidden;
+    opacity: 0;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
+}
+.full-image {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  font-size: 0;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    font-size: 0;
+  }
+}
+.pt {
+  padding-top: 7rem;
+}
+
+.email {
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  background-color: #181818;
+  &-wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    height: 90%;
+
+    @include respond-down(medium) {
+      height: 80%;
+    }
+  }
+  &-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #000000;
+  }
+  &-top {
+    text-align: center;
+    > p {
+      font-size: 1.4rem;
+      line-height: 120%;
+      letter-spacing: -0.01em;
+      color: $black;
+      margin-bottom: 1.4rem;
+      color: $white;
+      @include respond-above(xl) {
+        font-size: 0.833vw;
+        line-height: 110%;
+        margin-bottom: 2.4rem;
+      }
+    }
+
+    > a {
+      font-size: 8rem;
+      line-height: 90%;
+      cursor: pointer;
+      color: $white !important;
+      @include respond-above(xl) {
+        font-size: 5.729vw;
+      }
+      position: relative;
+      > span {
+        letter-spacing: -0.05em;
+      }
+      &::after {
+        left: 0;
+        bottom: 0;
+        content: "";
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        transform-origin: 100% 50%;
+        transform: scale3d(0, 1, 1);
+        transition: transform 0.4s;
+        background-color: $white;
+      }
+
+      &:hover::after {
+        transform-origin: 0% 50%;
+        transform: scale3d(1, 1, 1);
+      }
+    }
+  }
+  &-lottie {
+    position: relative;
+    width: 100%;
+    height: 20.833vw;
+    @include respond-down(medium) {
+      height: 50%;
+    }
+    &__item {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.hobby,
+.clients {
+  background-color: #dadada;
+}
+

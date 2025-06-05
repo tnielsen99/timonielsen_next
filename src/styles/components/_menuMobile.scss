@@ -1,0 +1,129 @@
+.menuMobile {
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 10;
+    background-color: $black;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    opacity: 0;
+    &-wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding-top: 17.241379310344826vh;
+        padding-bottom: 95px;
+
+        @include respond-above(md) {
+            padding-bottom: 166px;
+        }
+
+        @include respond-above(lg) {
+            padding-bottom: 300px;
+        }
+    }
+    &-list {
+        text-align: right;
+    }
+    &-item {
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+    }
+    &-link {
+        color: $white !important;
+        font-size: 4rem !important;
+        line-height: 97% !important;
+        letter-spacing: -0.03em !important;
+        position: relative;
+
+        @include respond-above(md) {
+            font-size: 7.2rem !important;
+        }
+
+        &__wrap {
+            display: inline-flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        &__animate,
+        &__number {
+            display: inline-block;
+        }
+
+        &__number {
+            color: $white;
+            font-size: 1.4rem;
+            line-height: 110%;
+            letter-spacing: -0.01em;
+            padding-right: .8rem;
+
+            @include respond-above(md) {
+                font-size: 1.6rem;
+            }
+        }
+    }
+
+    &-credit {
+
+        &__inner {
+            width: 100%;
+            display: flex;
+
+            @include respond-above(md) {
+                justify-content: flex-end;
+            }
+        }
+    }
+    &-col1 {
+        width: calc(100%*2/6);
+
+        @include respond-above(md) {
+            width: calc(100%*1/6);
+        }
+
+        > .menuMobile-type:nth-child(1) {
+            margin-bottom: 2.2rem;
+        }
+    }
+    &-text,
+    &-grey{
+        color: $white;
+        font-size: 1.4rem;
+        line-height: 110%;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+    }
+    &-grey {
+        color: $greySub;
+        margin-bottom: .8rem;
+    }
+
+    &-footer {
+        position: fixed;
+        bottom: 1.6rem;
+        color: white;
+        width: auto;
+        min-width: max-content;
+        display: flex;
+        left: 50%;
+        transform: translate(-50%, 0%);
+
+        @include respond-above(md) {
+            bottom: 4rem;
+        }
+        &__text {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 110%;
+            letter-spacing: -0.01em;
+        }
+    }
+}
+
+.menuMobile .container {
+    height: 100%;
+}

@@ -1,0 +1,44 @@
+// SCSS Utils - Variables and Mixins
+@import 'scss-utils/variables';
+@import 'scss-utils/breakpoints';
+@import 'scss-utils/helpers';
+
+// Base styles
+@import 'base/reset';
+@import 'base/font';
+@import 'base/layout';
+
+// Components
+@import 'components/header';
+@import 'components/footer';
+@import 'components/loader';
+@import 'components/menu';
+@import 'components/menuMobile';
+@import 'components/transition';
+
+// Pages
+// Home
+@import 'pages/home/preloader';
+@import 'pages/home/hello';
+@import 'pages/home/person';
+
+// About
+@import 'pages/about/index';
+@import 'pages/about/award';
+@import 'pages/about/clinets';
+@import 'pages/about/hobby';
+@import 'pages/about/process';
+
+// Contact
+@import 'pages/contact/index';
+
+// Works
+@import 'pages/works/index';
+@import 'pages/works/slider';
+
+// Works Detail
+@import 'pages/works-detail-pages/index';
+@import 'pages/works-detail-pages/sb-pages';
+
+// Playground
+@import 'pages/play-ground/index';

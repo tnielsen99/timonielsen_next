@@ -1,0 +1,59 @@
+.footer-center {
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 1.6rem;
+    text-align: center;
+    @include respond-above(xl) {
+        bottom: 4rem
+    }
+    > p {
+        font-size: 14px;
+        line-height: 110%;
+        letter-spacing: -0.01em;
+        mix-blend-mode: multiply;
+        font-weight: 500;
+    }
+}
+.footer {
+    position: fixed;
+    z-index: 999;
+    width: auto;
+    min-width: max-content;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @include respond-above(xl) {
+        bottom: 4rem
+    }
+    &-clone {
+      opacity: 0;
+      visibility: hidden;
+      @include respond-down(medium) {
+        bottom: 1.4rem;
+      }
+    }
+    &-flex {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    &-content {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 110%;
+        letter-spacing: -0.01em;
+
+        @include respond-above(xl) {
+            font-size: 1.4rem;
+        }
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1920px) {
+    .footer-content {
+        font-size: 0.729vw;
+    }
+}

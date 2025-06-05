@@ -1,0 +1,24 @@
+.loader {
+  position: fixed;
+  z-index: 999;
+  mix-blend-mode: exclusion;
+  filter:invert(100%);
+  user-select: none;
+  @include respond-down(medium) {
+    display: none;
+  }
+}
+
+#progress {
+  position: absolute;
+  user-select: none;
+  width: max-content;
+  font-size: 2rem;
+  line-height: 120%;
+  left: -50px;
+  top: -10px;
+  color: $black;
+  @include respond-down(medium) {
+    display: none;
+  }
+}

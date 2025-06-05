@@ -1,0 +1,65 @@
+.preloader {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    background-color: $greyBackground;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    &-inner {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    &-lotties {
+        position: relative;
+    }
+}
+#lottie-loader,
+#lottie-drop,
+#lotti-home {
+    transform: unset !important;
+}
+#lottie-loader,
+#lottie-drop,
+#lottie-home {
+    @include respond-down(small) {
+        width: 100%;
+        max-width: 375px;
+    }
+}
+#lottie-drop {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    @media (min-width: 1025px) and (max-width: 1921px) {
+        height: 62.96296296296296vh;
+    }
+}
+#lottie-loader,
+#lottie-home {
+    @media (min-width: 1025px) and (max-width: 1921px) {
+        height: 37.03703703703704vh;
+    }
+}
+#lottie-home {
+    position: absolute;
+    top: 70%;
+    @media (min-width: 1025px) and (max-width: 1921px) {
+        top: 25.925925925925924vh;
+    }
+}
+
+@media (min-width: 640px) {
+    #lottie-home,
+    .preloader-lotties {
+        width: 600px;
+    }
+}

@@ -1,0 +1,68 @@
+.hello {
+    @include respond-down(medium) {
+        padding-top: 10.559662090813093vh;
+    }
+    @include respond-above(xl) {
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &-flex {
+        text-align: center;
+        @include respond-above(md) {
+            margin-right: -1.6rem;
+            display: flex;
+        }
+    }
+    &-title {
+        font-size: 8.3rem;
+        line-height: 115%;
+        letter-spacing: -0.05em;
+        margin-bottom: 1.6rem;
+        overflow: hidden;
+        @include respond-above(md) {
+            margin-bottom: 6.7rem;
+            font-size: 11.5rem;
+        }
+        @include respond-above(xl) {
+            margin-bottom: 0;
+            font-size: 15.625vw;
+        }
+    }
+    &-sub {
+        font-size: 2.4rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        line-height: 80%;
+        overflow: hidden;
+        display: inline-block;
+        height: fit-content;
+        > span {
+            display: inline-block;
+        }
+        @include respond-above(md) {
+            margin: 1.6rem 0 0 2rem;
+        }
+        @include respond-above(xl) {
+            font-size: 3.125vw;
+            margin: 7rem 0 0 2rem;
+        }
+    }
+}
+#lottie-home__clone {
+  opacity: 0;
+  visibility: hidden;
+
+  @media (min-width: 1025px) and (max-width: 1921px) {
+    height: 37.037037037vh;
+  }
+  @media (min-width: 640px) {
+    width: 600px;
+  }
+}

@@ -1,0 +1,134 @@
+.award {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 100%;
+  @include respond-down(medium) {
+    padding-bottom: 12rem;
+  }
+  &-full {
+    padding: 4.6296296296vh 0 0 0;
+    @include respond-above(xl) {
+      padding: 4.6296296296vh 0 16rem 0;
+    }
+  }
+  &-title,
+  &-table,
+  &-bottom {
+    width: calc(100% * 7 / 12);
+
+    @include respond-down(medium) {
+      width: 100%;
+    }
+  }
+
+  &-title {
+    position: relative;
+    @include respond-down(medium) {
+      width: 50%;
+    }
+
+    @include respond-down(small) {
+      width: 100%;
+    }
+    h3 {
+      position: relative;
+      font-size: 2.4rem;
+      letter-spacing: -0.02em;
+      text-indent: 2.5em;
+      line-height: 97%;
+      span {
+        text-indent: 0;
+      }
+      span.is-parrent {
+        overflow: hidden;
+        line-height: 110%;
+      }
+      @include respond-above(xl) {
+        font-size: 2.083vw;
+        letter-spacing: -0.04em;
+        text-indent: 5em;
+        line-height: 0;
+      }
+    }
+  }
+  &-table {
+    padding: 16rem 0;
+
+    @include respond-down(medium) {
+      padding: 12rem 0;
+    }
+  }
+  &-item {
+    padding: 16px 0;
+    position: relative;
+    &__content {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__text {
+      font-size: 1.25vw;
+      font-weight: 500;
+      line-height: 130%;
+      letter-spacing: -0.01em;
+      @include respond-down(medium) {
+        font-size: 1.2rem;
+      }
+      &:nth-child(1) {
+        width: calc(100% * 2.5 / 7);
+        @include respond-down(small) {
+          width: calc(100% * 3 / 7);
+        }
+      }
+      &:nth-child(2) {
+        width: calc(100% * 2.5 / 7);
+        text-align: left;
+        @include respond-down(small) {
+          width: calc(100% * 3 / 7);
+        }
+      }
+      &:nth-child(3) {
+        width: calc(100% / 7);
+        text-align: right;
+      }
+    }
+    &__line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      background: currentColor;
+    }
+  }
+
+  &-text {
+    font-size: 1.4rem;
+    line-height: 130%;
+    font-weight: 400;
+    color: $black;
+
+    @include respond-above(xl) {
+      font-size: 1.25vw;
+    }
+  }
+
+  &-bottom {
+    width: calc(100% * 3 / 12);
+    margin-right: 8.073vw;
+
+    @include respond-down(medium) {
+      width: calc(100% * 4 / 6);
+      margin-right: 0;
+    }
+  }
+  &-another {
+    width: 100%;
+    line-height: 110%;
+    span.is-parrent {
+      overflow: hidden;
+    }
+  }
+}

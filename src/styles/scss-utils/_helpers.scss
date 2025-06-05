@@ -1,0 +1,115 @@
+.font-main {
+  font-family: $mainFont;
+  font-weight: 400;
+}
+.font-sec {
+  font-family: $secondFont;
+  font-weight: 400;
+  font-style: italic;
+}
+.font-Harmond {
+  font-family: $thirdFont;
+}
+.ol-x {
+  overflow-x: hidden;
+}
+.ol-mobile {
+  @include respond-down(small) {
+    overflow: hidden;
+  }
+}
+.home-prefix {
+  position: relative;
+  z-index: 10;
+}
+.is-loading {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition: filter 200ms, -webkit-filter 200ms;
+}
+
+.is-loading.lazyloaded {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+}
+.hide-cursor {
+  cursor: none;
+}
+.ol {
+  @include respond-above(xl) {
+    overflow: hidden;
+  }
+}
+.menu-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.center-image {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 11.3rem;
+}
+.center-text {
+  display: block;
+  width: calc(100% * 4 / 12);
+  margin: 0 auto;
+  text-align: center;
+  font-size: 24px;
+  line-height: 110%;
+  letter-spacing: -0.01em;
+  color: $black;
+  padding: 0 20px 16rem;
+
+  > span {
+    font-family: $secondFont;
+    font-style: italic;
+    font-weight: 400;
+  }
+}
+.mt {
+  display: block;
+  margin-top: 10rem;
+
+  @include respond-above(xl) {
+    margin-top: 7rem;
+  }
+}
+.fh {
+  position: relative;
+  height: 100vh;
+}
+.hide-on-desktop {
+  @include respond-above(xl) {
+    display: none !important;
+  }
+}
+
+.hide-on-mobile {
+  @include respond-above(xl) {
+    display: block !important;
+  }
+}
+.disable-hover {
+  pointer-events: none;
+}
+.dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: $black;
+  border-radius: 50rem;
+  &-white {
+    background-color: $white;
+  }
+
+  @include respond-above(xl) {
+    width: 1.25vw;
+    height: 1.25vw;
+    top: 3%;
+  }
+}

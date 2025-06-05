@@ -1,0 +1,194 @@
+.contact {
+  padding: 10.5596620908vh 0 4rem 0;
+  @include respond-above(xl) {
+    padding: 15.74074074074074vh 0;
+  }
+  &-title {
+    text-align: center;
+    font-size: 4rem;
+    line-height: 110%;
+    letter-spacing: -0.05em;
+    @include respond-above(md) {
+      font-size: 5.7rem;
+    }
+    @include respond-above(xl) {
+      font-size: 5.729vw;
+    }
+    span.word {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+    }
+    span.word[data-word="make"] {
+      span.char[data-char="e"] {
+        padding-right: 0.04em;
+      }
+    }
+    span.word[data-word="Let's"] {
+      span.char[data-char="s"] {
+        padding-right: 0.06em;
+      }
+    }
+    span.word[data-word="collaborate"] {
+      span.char[data-char="e"] {
+        padding-right: 0.06em;
+      }
+    }
+  }
+
+  &-footer {
+    @include respond-above(md) {
+      position: fixed;
+      width: 100%;
+      bottom: 4rem;
+    }
+    &__title {
+      font-size: 1.4rem;
+      line-height: 120%;
+      letter-spacing: -0.01em;
+      font-weight: 500;
+      color: $greySub;
+
+      @include respond-above(xl) {
+        font-size: 0.833vw;
+      }
+    }
+
+    &__flex {
+      display: flex;
+      position: relative;
+      @include respond-down(xlarge) {
+        flex-wrap: wrap;
+        width: 30%;
+        row-gap: 56px;
+      }
+
+      @include respond-down(small) {
+        width: 85%;
+        row-gap: 1rem;
+      }
+
+      @include respond-above(xl) {
+        width: 100%;
+      }
+    }
+    &__col {
+      &:last-child {
+        position: absolute;
+        @include respond-down(xlarge) {
+          position: absolute;
+          right: -75vw;
+          top: -10vw;
+        }
+        @include respond-down(small) {
+          bottom: -115%;
+          left: -20%;
+          top: unset;
+          right: 0;
+        }
+        @include respond-above(xl) {
+          right: -7%;
+          top: -50%;
+          bottom: 0;
+          transform: translateY(-35%);
+          width: calc(100% * 4 / 12);
+        }
+      }
+      &:not(:last-child) {
+        width: 50%;
+        @include respond-above(xl) {
+          width: calc(100% * 1 / 12);
+        }
+      }
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        @include respond-down(small) {
+          margin-bottom: 2rem;
+        }
+      }
+    }
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    }
+
+    &__link {
+      > a {
+        font-size: 1.4rem;
+        line-height: 120%;
+        letter-spacing: -0.01em;
+        display: block;
+        font-weight: 500;
+        width: max-content;
+        @include respond-above(xl) {
+          font-size: 0.833vw;
+        }
+      }
+    }
+
+    &__mb9 {
+      margin-bottom: 3rem;
+      @include respond-above(xl) {
+        margin-bottom: 8.703703703703702vh;
+      }
+    }
+
+    &__mb7 {
+      margin-bottom: 1.2rem;
+      @include respond-above(xl) {
+        margin-bottom: 6.851851851851851vh;
+      }
+    }
+  }
+
+  &-link {
+    > a {
+      display: block;
+    }
+  }
+  &-mask {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    position: relative;
+    &__inner {
+      display: inline-block;
+    }
+  }
+  &-line {
+    background-color: $black;
+    height: 1px;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    @include respond-above(xl) {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  &-arrow {
+    visibility: hidden;
+    opacity: 0;
+    @include respond-above(xl) {
+      visibility: visible;
+      opacity: 1;
+    }
+    img {
+      display: inline-block;
+    }
+  }
+}
+
+.col-1 {
+  width: calc(100% * 1 / 12);
+}
+.col-ml-1 {
+  @include respond-above(xl) {
+    margin-left: calc(100% * 0.8 / 12);
+  }
+}
+.col-ml-2 {
+  margin-left: calc(100% * 2 / 12);
+}

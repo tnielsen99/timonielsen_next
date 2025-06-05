@@ -1,0 +1,40 @@
+.transition {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #090909;
+  width: 100%;
+  overflow: hidden;
+  z-index: 999;
+  @include respond-down(medium) {
+    display: none;
+  }
+  &.active {
+    height: 16.203703703703702vh;
+  }
+
+  &-item {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+    font-size: 12.5vw;
+    letter-spacing: -0.03em;
+    line-height: 97%;
+    color: #232323;
+
+    &__inner {
+      display: inline-block;
+      width: max-content;
+
+      span.char {
+        display: inline-block;
+        will-change: transform;
+        transform: translateY(100%);
+      }
+    }
+  }
+}

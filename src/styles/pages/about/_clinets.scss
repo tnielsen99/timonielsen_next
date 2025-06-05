@@ -1,0 +1,99 @@
+.clients {
+  &-wrap {
+    padding-top: 4.62962962962963vh;
+    padding-bottom: 12rem;
+    @include respond-above(xl) {
+      padding-bottom: 16rem;
+    }
+  }
+
+  &-title {
+    width: calc(100% * 5 / 12);
+    text-indent: 5em;
+    font-size: 2.083vw;
+    line-height: 110%;
+    letter-spacing: -0.02em;
+    margin-bottom: 4.4rem;
+    position: relative;
+    line-height: 0;
+    span {
+      text-indent: 0;
+    }
+    span.is-parrent {
+      overflow: hidden;
+      line-height: 110%;
+    }
+
+    @include respond-down(medium) {
+      width: calc(100% * 6 / 12);
+      font-size: 2.4rem;
+      text-indent: 2.5em;
+      line-height: 97%;
+    }
+
+    @include respond-down(small) {
+      width: 100%;
+    }
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 1.6rem;
+      height: 1.6rem;
+      background-color: $black;
+      border-radius: 50rem;
+      left: 0;
+      top: 0;
+      transform: translateY(25%);
+
+      @include respond-above(xl) {
+        width: 1.25vw;
+        height: 1.25vw;
+        transform: translateY(50%);
+      }
+    }
+  }
+  &-list {
+    width: calc(100% * 4 / 12);
+    margin-left: auto;
+
+    @include respond-down(medium) {
+      width: calc(100% * 6 / 12);
+    }
+
+    @include respond-down(small) {
+      width: calc(100% * 4 / 6);
+    }
+  }
+  &-item {
+    font-size: 4rem;
+    line-height: 109%;
+    letter-spacing: -0.05em;
+    background: linear-gradient(
+      to right,
+      rgb(28, 28, 28) 50%,
+      rgb(177, 177, 177) 50%
+    );
+    background-size: 200% 100%;
+    background-position-x: 100%;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    @include respond-above(xl) {
+      font-size: 3.438vw;
+    }
+  }
+  &-more {
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    line-height: 130%;
+    font-weight: 400;
+    color: $greySub;
+    padding-top: 12rem;
+    @include respond-above(xl) {
+      padding-top: 16rem;
+      font-size: 1.25vw;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  background-color: #ebebeb;
+}
+body,
+html {
+  visibility: hidden;
+  font-size: 62.5%;
+  font-smoothing: antialiased !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+body {
+  position: relative;
+  background-color: $greyBackground;
+  font-family: $mainFont;
+  font-style: normal;
+  font-weight: 400;
+  color: $black;
+}
+.disable-scroll {
+  overflow: hidden !important;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1.6rem;
+
+  @include respond-above(xl) {
+    padding-bottom: 4rem;
+  }
+}
+.container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  @include respond-above(xl) {
+    padding: 0 2.083vw;
+  }
+}

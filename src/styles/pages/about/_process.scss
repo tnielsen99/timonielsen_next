@@ -1,0 +1,135 @@
+.process {
+  &-flex {
+    @include respond-down(medium) {
+      padding-bottom: 600px;
+    }
+    @include respond-down(small) {
+      padding-bottom: 400px;
+    }
+    @include respond-above(xl) {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 8.62962962962963vh 0 11.11111111111111vh 0;
+    }
+  }
+  &-fixed {
+    @include respond-down(medium) {
+      width: 60%;
+      margin-bottom: 12rem;
+      padding-top: 4rem;
+    }
+    @include respond-down(small) {
+      width: 100%;
+    }
+    @include respond-above(xl) {
+      width: 40%;
+      height: 100vh;
+      padding-bottom: 16.72963vh;
+    }
+  }
+
+  &-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-list {
+    width: 100%;
+    @include respond-above(xl) {
+      width: calc(100% * 4 / 12);
+    }
+    &__item {
+      display: flex;
+      justify-content: space-between;
+
+      &:not(:last-child) {
+        padding-bottom: 12rem;
+
+        @include respond-above(xl) {
+          padding-bottom: 22.22222222222222vh;
+        }
+      }
+    }
+
+    &__title {
+      font-size: 2.4rem;
+      line-height: 110%;
+      letter-spacing: -0.02em;
+      overflow: hidden;
+      height: fit-content;
+      span {
+        display: inline-block;
+      }
+      @include respond-above(xl) {
+        letter-spacing: -0.04em;
+        font-size: 2.083vw;
+      }
+    }
+
+    &__desc {
+      font-size: 1.4rem;
+      letter-spacing: -0.01em;
+      line-height: 130%;
+      @include respond-above(xl) {
+        font-size: 0.833vw;
+        line-height: 130%;
+      }
+      span.is-parrent {
+        line-height: 120%;
+        overflow: hidden;
+      }
+    }
+
+    &__text {
+      width: calc(100% * 2 / 4);
+      @include respond-down(small) {
+        width: calc(100% * 4 / 6);
+      }
+      > div:nth-child(1) {
+        margin-bottom: 4rem;
+      }
+    }
+  }
+  &-title {
+    font-size: 2.4rem;
+    letter-spacing: -0.02em;
+    text-indent: 2.5em;
+    position: relative;
+    line-height: 97%;
+    span {
+      text-indent: 0;
+    }
+    span.is-parrent {
+      overflow: hidden;
+      line-height: 110%;
+    }
+    @include respond-above(xl) {
+      font-size: 2.083vw;
+      text-indent: 5em;
+      line-height: 0;
+    }
+  }
+}
+
+#lottie-about {
+  width: 80%;
+  margin-top: auto;
+  margin-left: -7vw;
+
+  @include respond-down(medium) {
+    position: absolute;
+    width: 100%;
+    bottom: 5%;
+    left: 0;
+    height: 400px;
+    margin: 0 auto;
+  }
+  @include respond-down(small) {
+    bottom: 0;
+  }
+  > svg {
+    transform: unset !important;
+  }
+}

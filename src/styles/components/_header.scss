@@ -1,0 +1,116 @@
+header {
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  left: 0;
+  top: 1.6rem;
+  mix-blend-mode: exclusion;
+  filter: invert(100%);
+  @include respond-above(xl) {
+    top: 4rem;
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-logo {
+    display: flex;
+    align-items: center;
+
+    @include respond-above(xl) {
+      flex: 0 0 calc(100% * 2 / 12);
+    }
+  }
+  &-text {
+    font-size: 1rem;
+    line-height: 110%;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    padding-left: 8px;
+    color: $black;
+
+    @include respond-above(xl) {
+      font-size: 1.4rem;
+      padding-left: 16px;
+    }
+  }
+  &-main {
+    margin-left: auto;
+    > a > svg {
+      max-width: 7.2rem;
+
+      @include respond-above(xl) {
+        max-width: 100%;
+      }
+    }
+    @include respond-above(md) {
+      margin-left: 0;
+    }
+    @include respond-above(xl) {
+      width: fit-content;
+      margin-right: calc(100% * 1.7 / 12);
+    }
+  }
+  &-version {
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    line-height: 110%;
+    display: none;
+    @include respond-above(xl) {
+      font-size: 1.4rem;
+    }
+    > span:nth-child(1) {
+      display: block;
+      text-indent: 16px;
+    }
+  }
+
+  &-burger {
+    margin-left: 2rem;
+    @include respond-above(md) {
+      margin-left: 8rem;
+    }
+    &__btn {
+      height: 39px;
+      width: 39px;
+      background-color: transparent;
+      border: none;
+      position: relative;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    &__line {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: $black;
+      position: absolute;
+      left: 0;
+      will-change: transform;
+
+      &:nth-child(1) {
+        top: 15px;
+      }
+      &:nth-child(2) {
+        bottom: 15px;
+      }
+    }
+  }
+}
+.header-about {
+  .nav-text,
+  .nav-version {
+    color: #ffffff;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1920px) {
+  .nav-text,
+  .nav-version {
+    font-size: 0.729vw;
+  }
+}
