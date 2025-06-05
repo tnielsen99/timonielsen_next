@@ -21,7 +21,6 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
   const isLoadedRef = useRef(false);
   
   const {
-    loadPreloaderAnimations,
     setupPreloaderSequence,
     playAnimation,
     destroyAllAnimations,
@@ -132,16 +131,26 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
   }, [playAnimation]);
 
   // Setup responsive preloader
-  const setupPreloader = useCallback(async () => {
+  const setupPreloader = useCallback(() => {
     if (isLoadedRef.current) return;
 
-    // Load preloader animations
-    await loadPreloaderAnimations();
+    // Wait for DOM elements and animations to be available
+    const checkAnimationsReady = () => {
+      const homeEl = document.getElementById('lottie-home');
+      const loaderEl = document.getElementById('lottie-loader');
+      const dropEl = document.getElementById('lottie-drop');
+      
+      if (homeEl && loaderEl && dropEl) {
+        // Elements exist, now try to setup the sequence
+        setupPreloaderSequence();
+      } else {
+        // Elements not ready yet, check again
+        setTimeout(checkAnimationsReady, 100);
+      }
+    };
     
-    // Add a small delay to ensure animations are registered
-    setTimeout(() => {
-      setupPreloaderSequence();
-    }, 50);
+    // Start checking for elements
+    setTimeout(checkAnimationsReady, 100);
 
     // Setup responsive animations using ScrollTrigger.matchMedia
     ScrollTrigger.matchMedia({
@@ -175,7 +184,6 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
 
     isLoadedRef.current = true;
   }, [
-    loadPreloaderAnimations,
     setupPreloaderSequence,
     animatePreloaderDesktop,
     animatePreloaderMobile,
@@ -184,8 +192,8 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
   ]);
 
   // Start preloader sequence
-  const startPreloader = useCallback(async () => {
-    await setupPreloader();
+  const startPreloader = useCallback(() => {
+    setupPreloader();
   }, [setupPreloader]);
 
   // Skip preloader (for development)

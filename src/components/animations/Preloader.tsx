@@ -22,7 +22,7 @@ export const Preloader = forwardRef<HTMLDivElement, PreloaderProps>(({
   desktopBottomPosition = '4rem',
   mobileBottomPosition = '1.6rem',
   autoStart = true,
-  skipOnDevelopment = true, // Changed to true by default
+  skipOnDevelopment = true, // Skip preloader in development for faster testing
 }, ref) => {
   const [isVisible, setIsVisible] = useState(true);
   const [loadingText, setLoadingText] = useState('Loading...');
@@ -52,17 +52,16 @@ export const Preloader = forwardRef<HTMLDivElement, PreloaderProps>(({
     }
 
     if (autoStart) {
-      startPreloader().catch(console.error);
+      startPreloader();
     }
 
     // Add timeout fallback to prevent infinite loading
     const timeoutId = setTimeout(() => {
-      console.warn('Preloader timeout - forcing completion');
       setIsVisible(false);
       if (onComplete) {
         onComplete();
       }
-    }, 5000); // 5 second timeout
+    }, 8000); // 8 second timeout to allow animations to complete
 
     return () => {
       clearTimeout(timeoutId);
@@ -74,6 +73,7 @@ export const Preloader = forwardRef<HTMLDivElement, PreloaderProps>(({
   if (!isVisible) {
     return null;
   }
+
 
   return (
     <div

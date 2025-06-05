@@ -39,13 +39,14 @@ declare global {
   }
 }
 
+// Create a global animations map that persists across hook instances
+const globalAnimationsMap = new Map<string, LottieAnimationInstance>();
+
 export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
   const {
     enableGsapIntegration = true,
     autoSetVisibility = true,
   } = options;
-
-  const animationsRef = useRef<Map<string, LottieAnimationInstance>>(new Map());
 
   // Wait for Lottie library to be loaded
   const waitForLottie = useCallback((): Promise<any> => {
@@ -92,19 +93,29 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
       return null;
     }
 
-    const animation = lottieLib.loadAnimation({
-      ...lottieConfig,
-      container,
-    });
+    try {
+      const animation = lottieLib.loadAnimation({
+        ...lottieConfig,
+        container,
+      });
 
-    animationsRef.current.set(id, animation);
+      if (!animation) {
+        console.warn(`Failed to create lottie animation for ${id}`);
+        return null;
+      }
 
-    // Apply GSAP integration if enabled
-    if (enableGsapIntegration && autoSetVisibility) {
-      gsap.set(container, { autoAlpha: 1 });
+      globalAnimationsMap.set(id, animation);
+
+      // Apply GSAP integration if enabled
+      if (enableGsapIntegration && autoSetVisibility) {
+        gsap.set(container, { autoAlpha: 1 });
+      }
+
+      return animation;
+    } catch (error) {
+      console.error(`Error loading lottie animation ${id}:`, error);
+      return null;
     }
-
-    return animation;
   }, [enableGsapIntegration, autoSetVisibility]);
 
   // Load default animations based on original code
@@ -193,6 +204,8 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
         path: '/images/Animate/HomeLoop.json',
       });
       animations.push(homeAnimation);
+    } else {
+      console.warn('lottie-home container not found');
     }
 
     // Loader animation
@@ -239,7 +252,7 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
 
   // Get animation by ID
   const getAnimation = useCallback((id: string) => {
-    return animationsRef.current.get(id) || null;
+    return globalAnimationsMap.get(id) || null;
   }, []);
 
   // Play animation
@@ -295,16 +308,16 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
     const animation = getAnimation(id);
     if (animation) {
       animation.destroy();
-      animationsRef.current.delete(id);
+      globalAnimationsMap.delete(id);
     }
   }, [getAnimation]);
 
   // Destroy all animations
   const destroyAllAnimations = useCallback(() => {
-    animationsRef.current.forEach((animation, id) => {
+    globalAnimationsMap.forEach((animation, id) => {
       animation.destroy();
     });
-    animationsRef.current.clear();
+    globalAnimationsMap.clear();
   }, []);
 
   // Helper function to setup the actual animation sequence
@@ -329,25 +342,21 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
 
   // Setup preloader animation sequence based on original code
   const setupPreloaderSequence = useCallback(() => {
-    const loaderAnimation = getAnimation('preloader-loader');
-    const dropAnimation = getAnimation('preloader-drop');
-    const homeAnimation = getAnimation('preloader-home');
+    const loaderAnimation = getAnimation('lottie-loader');
+    const dropAnimation = getAnimation('lottie-drop');
+    const homeAnimation = getAnimation('lottie-home');
 
     if (!loaderAnimation || !dropAnimation || !homeAnimation) {
-      console.warn('Preloader animations not found - retrying in 200ms');
-      // Retry after a longer delay
+      // Retry after a short delay
       setTimeout(() => {
-        const retryLoader = getAnimation('preloader-loader');
-        const retryDrop = getAnimation('preloader-drop');
-        const retryHome = getAnimation('preloader-home');
+        const retryLoader = getAnimation('lottie-loader');
+        const retryDrop = getAnimation('lottie-drop');
+        const retryHome = getAnimation('lottie-home');
         
-        if (!retryLoader || !retryDrop || !retryHome) {
-          console.warn('Preloader animations still not found after retry');
-          return;
+        if (retryLoader && retryDrop && retryHome) {
+          // Setup the animations with retry values
+          setupAnimationSequence(retryLoader, retryDrop, retryHome);
         }
-        
-        // Setup the animations with retry values
-        setupAnimationSequence(retryLoader, retryDrop, retryHome);
       }, 200);
       return;
     }
@@ -376,6 +385,6 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
     destroyAnimation,
     destroyAllAnimations,
     setupPreloaderSequence,
-    animations: animationsRef.current,
+    animations: globalAnimationsMap,
   };
 };
