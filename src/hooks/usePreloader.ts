@@ -61,17 +61,30 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
       },
     });
 
-    preloaderTl
-      .set('.loader', { zIndex: 1000 })
-      .set('.hello-title', { perspective: 300 })
-      .set('.preloader', { autoAlpha: 1 })
-      .set('.footer', { left: '50%', bottom: '50%' })
-      .from('.footer', { opacity: 0 })
-      .to('.footer', { width: '100%' }, '+=1.05')
-      .to('#lottie-loader', { opacity: 1 }, '-=1')
-      .to('.footer', { bottom: position }, '+=4')
-      .to('.footer', { width: 'auto' }, '-=0.25')
-      .from(
+    // Check if elements exist before animating to avoid GSAP warnings
+    const loaderEl = document.querySelector('.loader');
+    const preloaderEl = document.querySelector('.preloader');
+    const footerEl = document.querySelector('.footer');
+    const lottieLoaderEl = document.querySelector('#lottie-loader');
+
+    if (loaderEl) preloaderTl.set('.loader', { zIndex: 1000 });
+    if (document.querySelector('.hello-title')) preloaderTl.set('.hello-title', { perspective: 300 });
+    if (preloaderEl) preloaderTl.set('.preloader', { autoAlpha: 1, visibility: 'visible', opacity: 1 });
+    if (footerEl) {
+      preloaderTl
+        .set('.footer', { left: '50%', bottom: '50%' })
+        .from('.footer', { opacity: 0 })
+        .to('.footer', { width: '100%' }, '+=1.05')
+        .to('.footer', { bottom: position }, '+=4')
+        .to('.footer', { width: 'auto' }, '-=0.25');
+    }
+    if (lottieLoaderEl) {
+      preloaderTl.to('#lottie-loader', { opacity: 1 }, footerEl ? '-=1' : '+=0');
+    }
+    
+    // Animate chars if they exist
+    if (chars.length > 0) {
+      preloaderTl.from(
         chars,
         {
           yPercent: 110,
@@ -80,11 +93,22 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
           ease: 'power1.inOut',
         },
         '-=1.05'
-      )
-      .from('.hello-sub span', { yPercent: 100 }, '-=1.2')
-      .from('.person-col2', { opacity: 0 }, '-=1')
-      .from('.menu-home', { yPercent: 100 }, '-=0.8')
-      .from('header', { opacity: 0 }, '-=1');
+      );
+    }
+    
+    // Animate other elements if they exist
+    if (document.querySelector('.hello-sub span')) {
+      preloaderTl.from('.hello-sub span', { yPercent: 100 }, '-=1.2');
+    }
+    if (document.querySelector('.person-col2')) {
+      preloaderTl.from('.person-col2', { opacity: 0 }, '-=1');
+    }
+    if (document.querySelector('.menu-home')) {
+      preloaderTl.from('.menu-home', { yPercent: 100 }, '-=0.8');
+    }
+    if (document.querySelector('header')) {
+      preloaderTl.from('header', { opacity: 0 }, '-=1');
+    }
 
     timelineRef.current = preloaderTl;
   }, [playAnimation, onComplete]);
@@ -104,15 +128,28 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
       defaults: { duration: 1.2, ease: 'expo.inOut' },
     });
 
-    preloaderTl
-      .set('.loader', { zIndex: 1000 })
-      .set('.hello-title', { perspective: 300 })
-      .set('.preloader', { autoAlpha: 1 })
-      .set('.footer', { left: '50%', bottom: '50%' })
-      .from('.footer', { opacity: 0 })
-      .to('.footer', { bottom: position }, '+=1')
-      .to('#lottie-loader', { opacity: 1 }, '-=1')
-      .from(
+    // Check if elements exist before animating to avoid GSAP warnings
+    const loaderEl = document.querySelector('.loader');
+    const preloaderEl = document.querySelector('.preloader');
+    const footerEl = document.querySelector('.footer');
+    const lottieLoaderEl = document.querySelector('#lottie-loader');
+
+    if (loaderEl) preloaderTl.set('.loader', { zIndex: 1000 });
+    if (document.querySelector('.hello-title')) preloaderTl.set('.hello-title', { perspective: 300 });
+    if (preloaderEl) preloaderTl.set('.preloader', { autoAlpha: 1, visibility: 'visible', opacity: 1 });
+    if (footerEl) {
+      preloaderTl
+        .set('.footer', { left: '50%', bottom: '50%' })
+        .from('.footer', { opacity: 0 })
+        .to('.footer', { bottom: position }, '+=1');
+    }
+    if (lottieLoaderEl) {
+      preloaderTl.to('#lottie-loader', { opacity: 1 }, '-=1');
+    }
+    
+    // Animate chars if they exist
+    if (chars.length > 0) {
+      preloaderTl.from(
         chars,
         {
           yPercent: 110,
@@ -121,11 +158,22 @@ export const usePreloader = (options: UsePreloaderOptions = {}) => {
           ease: 'power1.inOut',
         },
         '+=4'
-      )
-      .from('.hello-sub span', { yPercent: 105 }, '-=1.2')
-      .from('.person-col2', { opacity: 0 }, '-=0.8')
-      .from('.menu-home', { yPercent: 100 }, '-=0.6')
-      .from('header', { opacity: 0 }, '-=1.4');
+      );
+    }
+    
+    // Animate other elements if they exist
+    if (document.querySelector('.hello-sub span')) {
+      preloaderTl.from('.hello-sub span', { yPercent: 105 }, '-=1.2');
+    }
+    if (document.querySelector('.person-col2')) {
+      preloaderTl.from('.person-col2', { opacity: 0 }, '-=0.8');
+    }
+    if (document.querySelector('.menu-home')) {
+      preloaderTl.from('.menu-home', { yPercent: 100 }, '-=0.6');
+    }
+    if (document.querySelector('header')) {
+      preloaderTl.from('header', { opacity: 0 }, '-=1.4');
+    }
 
     timelineRef.current = preloaderTl;
   }, [playAnimation]);

@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $breakpoints: (
     "xs": 25em,
     // 400px
@@ -28,9 +30,9 @@ $breakpoints-down: (
 
 @mixin respond-above($breakpoint) {
     // If the breakpoint exists in the map.
-    @if map-has-key($breakpoints, $breakpoint) {
+    @if map.has-key($breakpoints, $breakpoint) {
         // Get the breakpoint value.
-        $breakpoint-value: map-get($breakpoints, $breakpoint);
+        $breakpoint-value: map.get($breakpoints, $breakpoint);
         // Write the media query.
         @media (min-width: $breakpoint-value) {
             @content;
@@ -44,9 +46,9 @@ $breakpoints-down: (
 
 @mixin respond-down($breakpoints) {
     // If the breakpoint exists in the map.
-    @if map-has-key($breakpoints-down, $breakpoints) {
+    @if map.has-key($breakpoints-down, $breakpoints) {
         // Get the breakpoint value.
-        $breakpoint-value: map-get($breakpoints-down, $breakpoints);
+        $breakpoint-value: map.get($breakpoints-down, $breakpoints);
         // Write the media query.
         @media (max-width: $breakpoint-value) {
             @content;

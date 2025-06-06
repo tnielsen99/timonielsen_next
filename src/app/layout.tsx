@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { AppProvider } from "@/contexts/AppContext";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import Transition from "@/components/layout/Transition";
-import Loader from "@/components/layout/Loader";
-import MobileMenu from "@/components/layout/MobileMenu";
-import Preloader from "@/components/animations/Preloader";
+import LayoutClient from "@/components/layout/LayoutClient";
 import "../styles/globals.scss";
 
 // Load custom fonts
@@ -64,26 +60,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
+      <body 
         className={`ol ol-mobile ${roobert.variable} ${harmond.variable} ${roxborough.variable}`}
         data-barba="wrapper"
+        suppressHydrationWarning={true}
       >
-        <AppProvider>
-          <Preloader />
-          <Transition />
-          <Loader />
-          <div data-scroll-container>
-            <Header />
-            <main>
-              {children}
-            </main>
-            <Footer />
-          </div>
-          <MobileMenu />
-        </AppProvider>
+        {/* Include Lottie library before React components */}
+        <Script src="/js/lottie.min.js" strategy="beforeInteractive" />
         
-        {/* Include Lottie library for animations */}
-        <script src="/js/lottie.min.js" />
+        <AppProvider>
+          <LayoutClient>
+            {children}
+          </LayoutClient>
+        </AppProvider>
       </body>
     </html>
   );

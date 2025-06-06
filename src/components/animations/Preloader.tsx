@@ -22,7 +22,7 @@ export const Preloader = forwardRef<HTMLDivElement, PreloaderProps>(({
   desktopBottomPosition = '4rem',
   mobileBottomPosition = '1.6rem',
   autoStart = true,
-  skipOnDevelopment = true, // Skip preloader in development for faster testing
+  skipOnDevelopment = true, // Skip in dev for faster development
 }, ref) => {
   const [isVisible, setIsVisible] = useState(true);
   const [loadingText, setLoadingText] = useState('Loading...');
@@ -47,7 +47,11 @@ export const Preloader = forwardRef<HTMLDivElement, PreloaderProps>(({
   // Handle development skip and timeout fallback
   useEffect(() => {
     if (skipOnDevelopment && process.env.NODE_ENV === 'development') {
-      skipPreloader();
+      // In development, skip immediately
+      setIsVisible(false);
+      if (onComplete) {
+        onComplete();
+      }
       return;
     }
 
@@ -86,11 +90,13 @@ export const Preloader = forwardRef<HTMLDivElement, PreloaderProps>(({
         width: '100%',
         height: '100%',
         zIndex: 10000,
-        background: '#ffffff',
+        background: '#ebebeb',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        opacity: 1,
+        visibility: 'visible',
       }}
     >
       {/* Main content container */}

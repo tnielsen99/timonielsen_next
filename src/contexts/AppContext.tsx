@@ -7,6 +7,8 @@ interface AppContextType {
   setIsMenuOpen: (open: boolean) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
+  isPreloaderComplete: boolean;
+  setIsPreloaderComplete: (complete: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -14,11 +16,21 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
 
   return (
-    <AppContext.Provider value={{ isMenuOpen, setIsMenuOpen, isLoading, setIsLoading }}>
-      {children}
-    </AppContext.Provider>
+    <div suppressHydrationWarning>
+      <AppContext.Provider value={{ 
+        isMenuOpen, 
+        setIsMenuOpen, 
+        isLoading, 
+        setIsLoading,
+        isPreloaderComplete,
+        setIsPreloaderComplete
+      }}>
+        {children}
+      </AppContext.Provider>
+    </div>
   );
 };
 

@@ -1,7 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef, forwardRef } from 'react';
+import React, { useEffect, useRef, forwardRef, useState } from 'react';
 import { gsap, animateTextIn } from '@/lib/gsap';
+import { loadSplitting } from '@/lib/splitting';
+
+// Import CSS statically to avoid HMR issues
+import 'splitting/dist/splitting.css';
+import 'splitting/dist/splitting-cells.css';
 
 export interface GSAPTextProps {
   children: React.ReactNode;
@@ -37,15 +42,59 @@ export const GSAPText = forwardRef<any, GSAPTextProps>(({
   const elementRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const hasAnimatedRef = useRef(false);
+  const [Splitting, setSplitting] = useState<any>(null);
+
+  // Load Splitting.js dynamically
+  useEffect(() => {
+    loadSplitting().then(setSplitting).catch(console.error);
+  }, []);
 
   // Create the split text animation
   const createAnimation = async () => {
     const element = elementRef.current;
     if (!element || (once && hasAnimatedRef.current)) return;
 
-    // For now, disable splitting and just animate the element as a whole
-    // TODO: Re-implement text splitting with a different approach
+    // Apply text splitting
     let targets: Element[] = [element];
+    
+    if (splitBy !== 'lines' && animationType !== 'none') {
+      if (Splitting && typeof Splitting === 'function') {
+        // Use Splitting.js if available and is a function
+        try {
+          const results = Splitting({
+            target: element,
+            by: splitBy,
+          });
+          
+          if (results && results.length > 0) {
+            const result = results[0];
+            if (splitBy === 'chars' && result.chars) {
+              targets = result.chars;
+            } else if (splitBy === 'words' && result.words) {
+              targets = result.words;
+            }
+          }
+        } catch (error) {
+          console.warn('Splitting.js failed, using fallback animation:', error);
+        }
+      }
+      
+      // Fallback: if Splitting isn't available or failed, check for existing splits
+      if (targets.length === 1 && targets[0] === element) {
+        // Check if text has already been split by looking for splitting classes
+        const existingChars = element.querySelectorAll('.char');
+        const existingWords = element.querySelectorAll('.word');
+        
+        if (splitBy === 'chars' && existingChars.length > 0) {
+          targets = Array.from(existingChars);
+        } else if (splitBy === 'words' && existingWords.length > 0) {
+          targets = Array.from(existingWords);
+        } else {
+          // Use fallback: animate the whole element
+          // console.log('Using fallback animation for:', element.textContent?.trim());
+        }
+      }
+    }
 
     if (targets.length === 0) return;
 
@@ -146,10 +195,10 @@ export const GSAPText = forwardRef<any, GSAPTextProps>(({
     
     const timer = setTimeout(async () => {
       await createAnimation();
-    }, 100);
+    }, 500); // Increased delay to allow Splitting to load
 
     return () => clearTimeout(timer);
-  }, [autoPlay, triggerOnVisible]);
+  }, [autoPlay, triggerOnVisible, Splitting]);
 
   // Setup scroll trigger animation
   useEffect(() => {
@@ -157,10 +206,10 @@ export const GSAPText = forwardRef<any, GSAPTextProps>(({
     
     const timer = setTimeout(async () => {
       await createAnimation();
-    }, 100);
+    }, 500); // Increased delay to allow Splitting to load
 
     return () => clearTimeout(timer);
-  }, [triggerOnVisible]);
+  }, [triggerOnVisible, Splitting]);
 
   // Cleanup
   useEffect(() => {

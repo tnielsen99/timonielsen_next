@@ -75,7 +75,27 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
     const lottieLib = window.bodymovin || (window as any).lottie;
     
     if (!lottieLib) {
-      console.warn('Lottie library not found. Available globals:', Object.keys(window));
+      console.warn('Lottie library not found. Waiting for it to load...');
+      // Try to wait for lottie to load
+      setTimeout(() => {
+        const retryLib = window.bodymovin || (window as any).lottie;
+        if (retryLib && container) {
+          try {
+            const animation = retryLib.loadAnimation({
+              ...lottieConfig,
+              container,
+            });
+            if (animation) {
+              globalAnimationsMap.set(id, animation);
+              if (enableGsapIntegration && autoSetVisibility) {
+                gsap.set(container, { autoAlpha: 1 });
+              }
+            }
+          } catch (error) {
+            console.error(`Error loading lottie animation ${id} on retry:`, error);
+          }
+        }
+      }, 500);
       return null;
     }
     
@@ -342,16 +362,16 @@ export const useLottieAnimation = (options: UseLottieAnimationOptions = {}) => {
 
   // Setup preloader animation sequence based on original code
   const setupPreloaderSequence = useCallback(() => {
-    const loaderAnimation = getAnimation('lottie-loader');
-    const dropAnimation = getAnimation('lottie-drop');
-    const homeAnimation = getAnimation('lottie-home');
+    const loaderAnimation = getAnimation('preloader-loader');
+    const dropAnimation = getAnimation('preloader-drop');
+    const homeAnimation = getAnimation('preloader-home');
 
     if (!loaderAnimation || !dropAnimation || !homeAnimation) {
       // Retry after a short delay
       setTimeout(() => {
-        const retryLoader = getAnimation('lottie-loader');
-        const retryDrop = getAnimation('lottie-drop');
-        const retryHome = getAnimation('lottie-home');
+        const retryLoader = getAnimation('preloader-loader');
+        const retryDrop = getAnimation('preloader-drop');
+        const retryHome = getAnimation('preloader-home');
         
         if (retryLoader && retryDrop && retryHome) {
           // Setup the animations with retry values

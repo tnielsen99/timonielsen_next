@@ -1,0 +1,23 @@
+// Critical visibility override
+// This ensures content is visible even if JavaScript fails
+@media screen {
+  // Always make content visible by default
+  body,
+  html {
+    opacity: 1 !important;
+  }
+  
+  // Only apply loading styles when actively preloading
+  body.gsap-ready,
+  body.preloader-complete {
+    opacity: 1 !important;
+  }
+}
+
+// Fallback for when JS is disabled
+noscript {
+  body,
+  html {
+    opacity: 1 !important;
+  }
+}

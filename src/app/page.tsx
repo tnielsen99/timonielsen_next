@@ -9,14 +9,13 @@ import { useGSAPAnimations, useLocomotiveScroll } from "@/hooks";
 import { GSAPText, LottiePlayer } from "@/components/animations";
 
 export default function HomePage() {
-  // Temporarily disable all hooks to isolate the SSR issue
-  // const { scroll } = useLocomotiveScroll();
-  // const { triggerAnimations } = useGSAPAnimations({
-  //   page: 'home',
-  //   delay: 0.7,
-  //   enableScrollTrigger: true,
-  //   locomotiveScroll: scroll,
-  // });
+  const { scroll } = useLocomotiveScroll();
+  const { triggerAnimations } = useGSAPAnimations({
+    page: 'home',
+    delay: 0.7,
+    enableScrollTrigger: true,
+    locomotiveScroll: scroll,
+  });
 
   return (
     <div data-scroll-container className="home-prefix">

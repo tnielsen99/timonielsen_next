@@ -7,6 +7,17 @@ import { TextPlugin } from 'gsap/TextPlugin';
 // Register GSAP plugins
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, TextPlugin);
+  
+  // Remove any loading states after GSAP is ready
+  if (typeof document !== 'undefined') {
+    requestAnimationFrame(() => {
+      // Use class-based approach to avoid hydration issues
+      document.documentElement.classList.remove('preloader-active');
+      document.body.classList.add('gsap-ready');
+      
+      console.log('GSAP: Plugins registered and ready');
+    });
+  }
 }
 
 // GSAP configuration constants

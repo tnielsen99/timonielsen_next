@@ -6,6 +6,6 @@ $greyText: rgba(222, 222, 222, 1);
 $greySub: rgb(135, 135, 135);
 $greyBorder: #BDBDBD;
 
-$mainFont: 'Roobert';
-$secondFont: 'Roxborough CF';
-$thirdFont: 'Harmond';
+$mainFont: var(--font-roobert), 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+$secondFont: var(--font-roxborough), 'Roxborough CF', Georgia, serif;
+$thirdFont: var(--font-harmond), 'Harmond', Georgia, serif;
